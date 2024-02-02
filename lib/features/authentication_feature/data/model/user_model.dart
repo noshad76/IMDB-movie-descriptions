@@ -1,7 +1,7 @@
 import 'package:movie_app/features/authentication_feature/domain/entities/user_entity.dart';
 
 class UserModel extends UserEntity {
-  UserModel({
+  const UserModel({
     required int id,
     required String name,
     required String email,

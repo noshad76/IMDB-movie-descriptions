@@ -1,20 +1,39 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'authentication_bloc.dart';
 
-class AuthenticationState extends Equatable {
-  final SignInStatus signInStatus;
-  final SignUpStatus signUpStatus;
+abstract class AuthenticationState extends Equatable {
+  final UserEntity? userEntity;
+  final String? error;
   const AuthenticationState({
-    required this.signInStatus,
-    required this.signUpStatus,
+    this.userEntity,
+    this.error,
   });
-  AuthenticationState copyWith(
-      SignInStatus? newSignInStatus, SignUpStatus? newSignUpStatus) {
-    return AuthenticationState(
-        signInStatus: newSignInStatus ?? signInStatus,
-        signUpStatus: newSignUpStatus ?? signUpStatus);
-  }
+  @override
+  List<Object?> get props => [userEntity, error];
+}
+
+class AuthenticationInit extends AuthenticationState {
+  const AuthenticationInit();
+}
+
+class AuthenticationLoading extends AuthenticationState {
+  const AuthenticationLoading();
+}
+
+class AuthenticationDone extends AuthenticationState {
+  const AuthenticationDone(UserEntity userEntity)
+      : super(userEntity: userEntity);
+}
+
+class AuthenticationFaild extends AuthenticationState {
+  const AuthenticationFaild(String error) : super(error: error);
+}
+
+class EmailAndPasswordChanged extends AuthenticationEvent {
+  final String email;
+  final String password;
+
+   EmailAndPasswordChanged(this.password, {required this.email});
 
   @override
-  List<Object?> get props => [signInStatus, signUpStatus];
+  List<Object> get props => [email,password];
 }

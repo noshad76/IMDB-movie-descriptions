@@ -13,7 +13,7 @@ class TermsPageCubit extends Cubit<TermsPageState> {
   void toNextPage() async {
     if (privacyPolicy == true && terms == true) {
       emit(TermsPageLoading());
-      await Future.delayed(Duration(seconds: 2));
+      // await Future.delayed(const Duration());
       emit(TermsPageCompeleted());
       debugPrint('compeleterd');
     } else {

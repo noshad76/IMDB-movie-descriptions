@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
+
 import 'package:movie_app/core/resources/data_state.dart';
 import 'package:movie_app/features/authentication_feature/data/data_source/remote/authentication_api.dart';
 import 'package:movie_app/features/authentication_feature/data/model/signin_model.dart';
@@ -8,7 +10,10 @@ import 'package:movie_app/features/authentication_feature/domain/entities/user_e
 import 'package:movie_app/features/authentication_feature/domain/repository/authentication_repository.dart';
 
 class AuthenticationRepositoryImpl extends AuthenticationRepository {
-  AuthenticationApi authenticationApi = AuthenticationApi();
+  AuthenticationApi authenticationApi;
+  AuthenticationRepositoryImpl({
+    required this.authenticationApi,
+  });
 
   @override
   Future<DataState<SignInEntity>> fetchSigninData(
@@ -28,10 +33,11 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<DataState<UserEntity>> fetchUserData(String email, String password, String name) async{
+  Future<DataState<UserEntity>> fetchUserData(
+      String email, String password, String name) async {
     try {
       Response response = await authenticationApi.signUpRequest(
-           name: name,email: email,password: password);
+          name: name, email: email, password: password);
       if (response.statusCode == 200) {
         UserEntity userEntity = UserModel.fromJson(response.data);
         return DataSuccess(userEntity);
@@ -44,8 +50,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   }
 
   @override
-  Future<DataState<SignInEntity>> refreshToken(String refreshToken) async{
-   try {
+  Future<DataState<SignInEntity>> refreshToken(String refreshToken) async {
+    try {
       Response response = await authenticationApi.refreshTokenRequest(
           refreshToken: refreshToken);
       if (response.statusCode == 200) {

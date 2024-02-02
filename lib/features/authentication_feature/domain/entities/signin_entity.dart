@@ -1,6 +1,9 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:equatable/equatable.dart';
 
 class SignInEntity extends Equatable {
+  
   final String token_type;
   final int expires_in;
   final String access_token;
