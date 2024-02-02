@@ -33,6 +33,7 @@ class TermsPage extends StatelessWidget {
     final TextStyle desTextStyle = Theme.of(context)
         .textTheme
         .bodyMedium!
+        // ignore: prefer_const_constructors
         .copyWith(color: Color(0xff625B71));
     return Scaffold(
       body: Container(

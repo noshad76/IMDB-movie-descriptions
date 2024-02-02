@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/cubit/cubit/terms_page_cubit.dart';
 import 'package:movie_app/locator_container.dart';
 
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
           create: (context) => TermsPageCubit(),
           child: Container(),
         ),
+        BlocProvider<AuthenticationBloc>(create: (context) => getIt(),)
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

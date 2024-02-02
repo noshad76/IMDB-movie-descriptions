@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/colors.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/widgets/login_button.dart';
@@ -13,7 +14,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool passwrodVisible = false;
-
+  final TextEditingController userName = TextEditingController();
+  final TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.sizeOf(context).height;
@@ -56,7 +58,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               child: Material(
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(50),
                   topLeft: Radius.circular(50),
                 ),
@@ -67,9 +69,9 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: width * 0.85,
                         child: TextFormField(
-                          controller: getIt<AuthenticationBloc>().userName,
+                          controller: userName,
                           decoration: InputDecoration(
-                            label: Text('Email'),
+                            label: const Text('Email'),
                             suffixIcon: Icon(
                               Icons.email,
                               color: Palete.purple,
@@ -91,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: width * 0.85,
                         child: TextFormField(
-                          controller: getIt<AuthenticationBloc>().password,
+                          controller: password,
                           obscureText: passwrodVisible,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
@@ -109,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                 });
                               },
                             ),
-                            label: Text('Password'),
+                            label: const Text('Password'),
                             labelStyle: TextStyle(color: Palete.purple),
                             hintText: 'Enter Password',
                             hintStyle: TextStyle(color: Palete.purple),
@@ -124,11 +126,64 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       SizedBox(height: height * 0.04),
-                      LoginButton(
-                        width: width * 0.85,
-                        height: height * 0.05,
-                        color: Palete.purple,
-                        text: 'Login',
+                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                        builder: (context, state) {
+                          if (state is AuthenticationInit) {
+                            return LoginButton(
+                              width: width * 0.85,
+                              height: height * 0.05,
+                              color: Palete.purple,
+                              text: const Text('Login',
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {
+                                getIt<AuthenticationBloc>().add(SignUpInApp(
+                                  email: userName.text,
+                                  password: password.text,
+                                ));
+                              },
+                            );
+                          } else if (state is AuthenticationLoading) {
+                            return LoginButton(
+                              width: width * 0.85,
+                              height: height * 0.05,
+                              color: Palete.purple,
+                              onPressed: () {},
+                              text: const CircularProgressIndicator(),
+                            );
+                          } else if (state is AuthenticationDone) {
+                            // Handle success state
+                            // You might want to navigate to another screen or show a success message
+                            return LoginButton(
+                              width: width * 0.85,
+                              height: height * 0.05,
+                              color: Palete.purple,
+                              text: const Text('Success!',
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {},
+                            );
+                          } else if (state is AuthenticationFaild) {
+                            // Handle failure state
+                            // You might want to show an error message to the user
+                            return LoginButton(
+                              width: width * 0.85,
+                              height: height * 0.05,
+                              color: Palete.purple,
+                              text: Text('Error: ${state.error}',
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {},
+                            );
+                          } else {
+                            // Handle other states or a default state
+                            return LoginButton(
+                              width: width * 0.85,
+                              height: height * 0.05,
+                              color: Palete.purple,
+                              text: const Text('Login',
+                                  style: TextStyle(color: Colors.white)),
+                              onPressed: () {},
+                            );
+                          }
+                        },
                       ),
                       SizedBox(height: height * 0.03),
                       Row(
@@ -138,12 +193,12 @@ class _LoginPageState extends State<LoginPage> {
                             height: 1,
                             width: 175,
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Text(
                             'OR',
                             style: TextStyle(color: Palete.purple),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Container(
                             color: Palete.purple,
                             height: 1,
@@ -156,7 +211,9 @@ class _LoginPageState extends State<LoginPage> {
                         width: width * 0.85,
                         height: height * 0.05,
                         color: Palete.darkblue,
-                        text: 'Login as Gust',
+                        text: const Text('Login as gust',
+                            style: TextStyle(color: Colors.white)),
+                        onPressed: () {},
                       ),
                     ],
                   ),

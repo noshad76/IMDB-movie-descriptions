@@ -17,6 +17,9 @@ class AuthenticationInit extends AuthenticationState {
 
 class AuthenticationLoading extends AuthenticationState {
   const AuthenticationLoading();
+
+  @override
+  List<Object?> get props => [];
 }
 
 class AuthenticationDone extends AuthenticationState {
@@ -26,14 +29,4 @@ class AuthenticationDone extends AuthenticationState {
 
 class AuthenticationFaild extends AuthenticationState {
   const AuthenticationFaild(String error) : super(error: error);
-}
-
-class EmailAndPasswordChanged extends AuthenticationEvent {
-  final String email;
-  final String password;
-
-   EmailAndPasswordChanged(this.password, {required this.email});
-
-  @override
-  List<Object> get props => [email,password];
 }

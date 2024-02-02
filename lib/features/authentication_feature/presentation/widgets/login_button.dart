@@ -5,24 +5,24 @@ class LoginButton extends StatelessWidget {
     super.key,
     required this.width,
     required this.height,
-    required this.color, required this.text,
+    required this.color,
+    required this.text,
+    required this.onPressed,
   });
-
+  final void Function()? onPressed;
   final double width;
   final double height;
   final Color color;
-  final String text;
+  final Widget text;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
           backgroundColor: MaterialStatePropertyAll(color),
           minimumSize: MaterialStatePropertyAll(Size(width, height))),
-      onPressed: () async {},
-      child:  Text(
-        text,
-        style: TextStyle(color: Colors.white),
-      ),
+      onPressed: onPressed,
+      child: text,
+      
     );
   }
 }
