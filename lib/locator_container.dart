@@ -11,7 +11,7 @@ final getIt = GetIt.instance;
 Future<void> initializeDependencies() async {
   //dio
   getIt.registerSingleton<Dio>(Dio());
-  
+
   //api
   getIt.registerSingleton<AuthenticationApi>(AuthenticationApi(dio: getIt()));
 
@@ -24,6 +24,7 @@ Future<void> initializeDependencies() async {
       GetUserDataUsecase(authenticationRepository: getIt()));
 
   //bloc
-  getIt.registerFactory<AuthenticationBloc>(
-      () => AuthenticationBloc(getIt(),));
+  getIt.registerLazySingleton<AuthenticationBloc>(() => AuthenticationBloc(
+        getIt(),
+      ));
 }

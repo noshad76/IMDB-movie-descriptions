@@ -15,17 +15,15 @@ class AuthenticationBloc
   AuthenticationBloc(this.getUserDataUsecase)
       : super(const AuthenticationInit()) {
     on<SignUpInApp>((event, emit) async {
-      emit(AuthenticationLoading());
+      emit(const AuthenticationLoading());
 
       DataState<UserEntity> dataState =
           await getUserDataUsecase(event.email, event.password, event.name);
 
       if (dataState is DataSuccess) {
         emit(AuthenticationDone(dataState.data!));
-        print(dataState.data);
       } else if (dataState is DataFailed) {
         emit(AuthenticationFaild(dataState.error!));
-        print(dataState.error);
       }
     });
   }

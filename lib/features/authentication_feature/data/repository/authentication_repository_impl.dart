@@ -34,8 +34,9 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
   @override
   Future<DataState<UserEntity>> fetchUserData(
       String email, String password, String name) async {
+    Response response;
     try {
-      Response response = await authenticationApi.signUpRequest(
+       response = await authenticationApi.signUpRequest(
           name: name, email: email, password: password);
       if (response.statusCode == 201) {
         UserEntity userEntity = UserModel.fromJson(response.data);
@@ -43,8 +44,8 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
       } else {
         return const DataFailed('Something Went Wrong. try again...');
       }
-    } catch (e) {
-      return const DataFailed("please check your connection...");
+    }  on DioException catch (e) {
+      return  DataFailed(e.response!.data['errors']);
     }
   }
 

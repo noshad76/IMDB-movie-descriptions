@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/colors.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/widgets/login_button.dart';
-import 'package:movie_app/locator_container.dart';
+import 'package:toastification/toastification.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -126,7 +126,39 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                       SizedBox(height: height * 0.04),
-                      BlocBuilder<AuthenticationBloc, AuthenticationState>(
+                      BlocConsumer<AuthenticationBloc, AuthenticationState>(
+                        listener: (context, state) {
+                          if (state is AuthenticationFaild) {
+                            toastification.show(
+                              context: context,
+                              type: ToastificationType.error,
+                              style: ToastificationStyle.minimal,
+                              title: const Text('somthing wrong!'),
+                              description: Text(state.error!),
+                              alignment: Alignment.topCenter,
+                              autoCloseDuration: const Duration(seconds: 4),
+                              borderRadius: BorderRadius.circular(12.0),
+                              boxShadow: lowModeShadow,
+                              showProgressBar: true,
+                              dragToClose: true,
+                              pauseOnHover: false,
+                            );
+                          } else if (state is AuthenticationDone) {
+                            toastification.show(
+                              context: context,
+                              type: ToastificationType.success,
+                              style: ToastificationStyle.minimal,
+                              title: const Text('Welcome To BluRibbon'),
+                              alignment: Alignment.topCenter,
+                              autoCloseDuration: const Duration(seconds: 4),
+                              borderRadius: BorderRadius.circular(12.0),
+                              boxShadow: lowModeShadow,
+                              showProgressBar: true,
+                              dragToClose: true,
+                              pauseOnHover: false,
+                            );
+                          }
+                        },
                         builder: (context, state) {
                           if (state is AuthenticationInit) {
                             return LoginButton(
@@ -136,10 +168,10 @@ class _LoginPageState extends State<LoginPage> {
                               text: const Text('Login',
                                   style: TextStyle(color: Colors.white)),
                               onPressed: () {
-                                getIt<AuthenticationBloc>().add(SignUpInApp(
-                                  email: userName.text,
-                                  password: password.text,
-                                ));
+                                BlocProvider.of<AuthenticationBloc>(context)
+                                    .add(SignUpInApp(
+                                        email: userName.text,
+                                        password: password.text));
                               },
                             );
                           } else if (state is AuthenticationLoading) {
@@ -148,29 +180,27 @@ class _LoginPageState extends State<LoginPage> {
                               height: height * 0.05,
                               color: Palete.purple,
                               onPressed: () {},
-                              text: const CircularProgressIndicator(),
-                            );
-                          } else if (state is AuthenticationDone) {
-                            // Handle success state
-                            // You might want to navigate to another screen or show a success message
-                            return LoginButton(
-                              width: width * 0.85,
-                              height: height * 0.05,
-                              color: Palete.purple,
-                              text: const Text('Success!',
-                                  style: TextStyle(color: Colors.white)),
-                              onPressed: () {},
+                              text: SizedBox(
+                                height: width * 0.05,
+                                width: width * 0.05,
+                                child: CircularProgressIndicator(
+                                  color: Palete.white,
+                                ),
+                              ),
                             );
                           } else if (state is AuthenticationFaild) {
-                            // Handle failure state
-                            // You might want to show an error message to the user
                             return LoginButton(
                               width: width * 0.85,
                               height: height * 0.05,
                               color: Palete.purple,
-                              text: Text('Error: ${state.error}',
+                              text: const Text('Try Again',
                                   style: TextStyle(color: Colors.white)),
-                              onPressed: () {},
+                              onPressed: () {
+                                BlocProvider.of<AuthenticationBloc>(context)
+                                    .add(SignUpInApp(
+                                        email: userName.text,
+                                        password: password.text));
+                              },
                             );
                           } else {
                             // Handle other states or a default state
