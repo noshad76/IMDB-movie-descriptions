@@ -17,9 +17,6 @@ class AuthenticationInit extends AuthenticationState {
 
 class AuthenticationLoading extends AuthenticationState {
   const AuthenticationLoading();
-
-  @override
-  List<Object?> get props => [];
 }
 
 class AuthenticationDone extends AuthenticationState {

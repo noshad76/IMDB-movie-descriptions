@@ -42,7 +42,7 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
         UserEntity userEntity = UserModel.fromJson(response.data);
         return DataSuccess(userEntity);
       } else {
-        return const DataFailed('Something Went Wrong. try again...');
+        return  DataFailed(response.data['errors']);
       }
     }  on DioException catch (e) {
       return  DataFailed(e.response!.data['errors']);

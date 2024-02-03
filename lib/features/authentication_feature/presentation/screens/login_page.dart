@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/colors.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/widgets/login_button.dart';
+import 'package:movie_app/features/movies_feature/presentation/screens/home_page.dart';
 import 'package:toastification/toastification.dart';
 
 class LoginPage extends StatefulWidget {
@@ -127,7 +130,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       SizedBox(height: height * 0.04),
                       BlocConsumer<AuthenticationBloc, AuthenticationState>(
-                        listener: (context, state) {
+                        listener: (context, state) async {
                           if (state is AuthenticationFaild) {
                             toastification.show(
                               context: context,
@@ -156,6 +159,17 @@ class _LoginPageState extends State<LoginPage> {
                               showProgressBar: true,
                               dragToClose: true,
                               pauseOnHover: false,
+                            );
+                            Future.delayed(
+                              Duration(seconds: 2),
+                              () {
+                                Navigator.of(context)
+                                    .pushReplacement(MaterialPageRoute(
+                                  builder: (context) {
+                                    return HomePage();
+                                  },
+                                ));
+                              },
                             );
                           }
                         },
@@ -243,7 +257,14 @@ class _LoginPageState extends State<LoginPage> {
                         color: Palete.darkblue,
                         text: const Text('Login as gust',
                             style: TextStyle(color: Colors.white)),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.of(context)
+                              .pushReplacement(MaterialPageRoute(
+                            builder: (context) {
+                              return HomePage();
+                            },
+                          ));
+                        },
                       ),
                     ],
                   ),

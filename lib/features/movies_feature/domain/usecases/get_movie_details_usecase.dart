@@ -7,8 +7,7 @@ class GetMovieDetailsUsecase extends UseCase<DataState<MovieEntity>, int> {
   MovieRepository movieRepository;
   GetMovieDetailsUsecase(this.movieRepository);
   @override
-  // ignore: avoid_renaming_method_parameters
-  Future<DataState<MovieEntity>> call(int page) {
-    return movieRepository.fetchMovieData(page);
+  Future<DataState<MovieEntity>> call(int param) {
+    return movieRepository.fetchMovieData(param);
   }
 }

@@ -1,7 +1,11 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 
 class MovieApi {
-  Dio dio = Dio();
+  Dio dio;
+  MovieApi({
+    required this.dio,
+  });
   Future<Response> callMovieList(int page) async {
     Response movieListResponse =
         await dio.get('https://moviesapi.ir/api/v1/movies', queryParameters: {
