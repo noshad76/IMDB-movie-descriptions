@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/colors.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/widgets/login_button.dart';
+import 'package:movie_app/features/geners_feature/presentation/bloc/bloc/genre_list_bloc/genre_bloc.dart';
 import 'package:movie_app/features/movies_feature/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 import 'package:movie_app/features/movies_feature/presentation/screens/home_page.dart';
 import 'package:toastification/toastification.dart';
@@ -265,6 +266,8 @@ class _LoginPageState extends State<LoginPage> {
                         onPressed: () {
                           BlocProvider.of<MovieListBloc>(context)
                               .add(LoadListMovie(1));
+                          BlocProvider.of<GenreBloc>(context)
+                              .add(LoadGenreList());
 
                           Navigator.of(context)
                               .pushReplacement(MaterialPageRoute(

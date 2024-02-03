@@ -37,7 +37,6 @@ class MovieRepositoryImpl extends MovieRepository {
       if (response.statusCode == 200) {
         MovieListEntity movieListEntity =
             MovieListModel.fromJson(response.data);
-        print(response.data);
         return DataSuccess(movieListEntity);
       } else {
         return DataFailed(response.data['errors']);

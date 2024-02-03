@@ -1,48 +1,52 @@
+
 import 'package:dio/dio.dart';
+
 import 'package:movie_app/core/resources/data_state.dart';
 import 'package:movie_app/features/geners_feature/data/data_source/remote/genres_api.dart';
 import 'package:movie_app/features/geners_feature/data/model/genres_list.dart';
-
 import 'package:movie_app/features/geners_feature/data/model/movie_list_by_genres.dart';
 import 'package:movie_app/features/geners_feature/domain/entities/genres_list_entitie.dart';
 import 'package:movie_app/features/geners_feature/domain/entities/movie_list_by_genres.dart';
-
 import 'package:movie_app/features/geners_feature/domain/repository/genres_repository.dart';
 
 class GenereRepositoryImpl extends GenereRepository {
-  GenrsApi genersApi = GenrsApi();
+  GenrsApi genersApi;
+  GenereRepositoryImpl({
+    required this.genersApi,
+  });
   @override
-  Future<DataState<GenrelistEntitie>> fetchGenreList() async {
+  Future<DataState<List<GenrelistEntitie>>> fetchGenreList() async {
+    Response response;
     try {
-    Response response = await genersApi.callGenrsList();
+      response = await genersApi.callGenrsList();
 
       if (response.statusCode == 200) {
-        GenrelistEntitie generelistEntitie =
+        List<GenrelistEntitie> generelistEntitie =
             GenresListModel.fromJson(response.data);
         return DataSuccess(generelistEntitie);
       } else {
-        return const DataFailed('Something Went Wrong. try again...');
+        return DataFailed(response.data['errors']);
       }
-    } catch (e) {
-      return const DataFailed("please check your connection...");
+    } on DioException catch (e) {
+      return DataFailed(e.response!.data['errors']);
     }
   }
 
   @override
   Future<DataState<MovieListByGenreEntitie>> fetchMovieListByGenre(
       int page, int genreId) async {
-   
+    Response response;
     try {
-       Response response = await genersApi.callMovieListByGenre(page, genreId);
+      response = await genersApi.callMovieListByGenre(page, genreId);
       if (response.statusCode == 200) {
         MovieListByGenreEntitie movieListByGenereEntitie =
             MovieListByGenereModel.fromJson(response.data);
         return DataSuccess(movieListByGenereEntitie);
       } else {
-        return const DataFailed('Something Went Wrong. try again...');
+        return DataFailed(response.data['erorrs']);
       }
-    } catch (e) {
-      return const DataFailed("please check your connection...");
+    } on DioException catch (e) {
+      return DataFailed(e.response!.data['errors']);
     }
   }
 }

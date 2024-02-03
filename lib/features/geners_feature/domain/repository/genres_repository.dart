@@ -3,7 +3,7 @@ import 'package:movie_app/features/geners_feature/domain/entities/genres_list_en
 import 'package:movie_app/features/geners_feature/domain/entities/movie_list_by_genres.dart';
 
 abstract class GenereRepository {
-  Future<DataState<GenrelistEntitie>> fetchGenreList();
+  Future<DataState<List<GenrelistEntitie>>> fetchGenreList();
   Future<DataState<MovieListByGenreEntitie>> fetchMovieListByGenre(
       int page, int genreId);
 }

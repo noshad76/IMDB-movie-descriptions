@@ -1,7 +1,10 @@
 import 'package:dio/dio.dart';
 
 class GenrsApi {
-  Dio dio = Dio();
+  Dio dio ;
+  GenrsApi({
+    required this.dio,
+  });
   Future<Response> callGenrsList() async {
     Response response = await dio.get('https://moviesapi.ir/api/v1/genres');
     return response;

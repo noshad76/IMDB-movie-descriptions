@@ -6,7 +6,7 @@ class GetGenreListUsecase {
   GenereRepository genreRepository;
   GetGenreListUsecase(this.genreRepository);
 
-  Future<DataState<GenrelistEntitie>> call() {
+  Future<DataState<List<GenrelistEntitie>>> call() {
     return genreRepository.fetchGenreList();
   }
 }

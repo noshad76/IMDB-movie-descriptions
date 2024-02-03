@@ -10,11 +10,14 @@ class GenresListModel extends GenrelistEntitie {
 
   factory GenresListModel.fromMap(Map<String, dynamic> map) {
     return GenresListModel(
-      id: map['id'].toInt() as int,
-      name: map['name'] as String,
+      id: map['id'],
+      name: map['name'],
     );
   }
 
-  factory GenresListModel.fromJson(String source) =>
-      GenresListModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  static List<GenresListModel> fromJson(List<dynamic> source) {
+    
+    return source.map((e) => GenresListModel.fromMap(e)).toList();
+  }
+  // GenresListModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

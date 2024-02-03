@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/colors.dart';
 
@@ -9,12 +8,14 @@ class GenreChips extends StatelessWidget {
     required this.width,
     required this.selectedGenere,
     required this.index,
+    required this.genre,
   });
 
   final double height;
   final double width;
   final int selectedGenere;
   final int index;
+  final String genre;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class GenreChips extends StatelessWidget {
         color: selectedGenere == index ? Palete.purple : Palete.white,
       ),
       child: Text(
-        index == 0 ? 'All' : 'Action',
+        index == 0 ? 'All' : genre,
         textAlign: TextAlign.center,
         style: TextStyle(
             fontSize: 15,

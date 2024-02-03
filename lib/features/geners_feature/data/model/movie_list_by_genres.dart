@@ -59,7 +59,7 @@ class Data extends Equatable {
       country: map['country'] as String,
       imdb_rating: map['imdb_rating'] as String,
       genres: List<String>.from((map['genres'] as List<String>)),
-      images: List<String>.from((map['images'] as List<String>)),
+      images: List<String>.from(( map['images'] == null ? [] : map['images'].cast<String>())),
     );
   }
 
