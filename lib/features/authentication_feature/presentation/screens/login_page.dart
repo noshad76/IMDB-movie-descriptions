@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/core/utils/colors.dart';
 import 'package:movie_app/features/authentication_feature/presentation/bloc/bloc/authentication_bloc.dart';
 import 'package:movie_app/features/authentication_feature/presentation/widgets/login_button.dart';
+import 'package:movie_app/features/movies_feature/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
 import 'package:movie_app/features/movies_feature/presentation/screens/home_page.dart';
 import 'package:toastification/toastification.dart';
 
@@ -153,20 +154,24 @@ class _LoginPageState extends State<LoginPage> {
                               style: ToastificationStyle.minimal,
                               title: const Text('Welcome To BluRibbon'),
                               alignment: Alignment.topCenter,
-                              autoCloseDuration: const Duration(seconds: 4),
+                              autoCloseDuration: const Duration(seconds: 3),
                               borderRadius: BorderRadius.circular(12.0),
                               boxShadow: lowModeShadow,
                               showProgressBar: true,
                               dragToClose: true,
                               pauseOnHover: false,
                             );
+
                             Future.delayed(
-                              Duration(seconds: 2),
-                              () {
+                              const Duration(seconds: 3),
+                              () async {
+                                BlocProvider.of<MovieListBloc>(context)
+                                    .add(LoadListMovie(1));
+
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(
                                   builder: (context) {
-                                    return HomePage();
+                                    return const HomePage();
                                   },
                                 ));
                               },
@@ -258,10 +263,13 @@ class _LoginPageState extends State<LoginPage> {
                         text: const Text('Login as gust',
                             style: TextStyle(color: Colors.white)),
                         onPressed: () {
+                          BlocProvider.of<MovieListBloc>(context)
+                              .add(LoadListMovie(1));
+
                           Navigator.of(context)
                               .pushReplacement(MaterialPageRoute(
                             builder: (context) {
-                              return HomePage();
+                              return const HomePage();
                             },
                           ));
                         },

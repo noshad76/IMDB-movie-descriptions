@@ -13,10 +13,12 @@ class MovieListBloc extends Bloc<MovieListEvent, MovieListState> {
   GetMovieListUsecase getMovieListUsecase;
   MovieListBloc(
     this.getMovieListUsecase,
-  ) : super( const MovieListLoading()) {
+  ) : super(const MovieListLoading()) {
     on<LoadListMovie>((event, emit) async {
+      emit(const MovieListLoading());
       DataState<MovieListEntity> dataState =
           await getMovieListUsecase(event.page);
+
       if (dataState is DataSuccess) {
         emit(MovieListLoaded(dataState.data!));
       } else if (dataState is DataFailed) {

@@ -3,20 +3,17 @@ import 'package:equatable/equatable.dart';
 import 'package:movie_app/core/resources/data_state.dart';
 import 'package:movie_app/features/movies_feature/domain/entities/movie_entity.dart';
 import 'package:movie_app/features/movies_feature/domain/usecases/get_movie_details_usecase.dart';
-import 'package:movie_app/features/movies_feature/domain/usecases/get_movie_list_usecase.dart';
 
 part 'movie_event.dart';
 part 'movie_state.dart';
 
 class MovieBloc extends Bloc<MovieEvent, MovieState> {
-  GetMovieListUsecase getMovieListUsecase;
   GetMovieDetailsUsecase getMovieDetailsUsecase;
 
-  MovieBloc(
-      {required this.getMovieDetailsUsecase, required this.getMovieListUsecase})
+  MovieBloc({required this.getMovieDetailsUsecase})
       : super(const MovieLoading()) {
     on<LoadMovie>((event, emit) async {
-      DataState<MovieEntity> dataState = await getMovieDetailsUsecase(event.id) ;
+      DataState<MovieEntity> dataState = await getMovieDetailsUsecase(event.id);
       if (dataState is DataSuccess) {
         emit(MovieLoaded(dataState.data!));
       }

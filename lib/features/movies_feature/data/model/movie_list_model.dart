@@ -19,15 +19,23 @@ class MovieListModel extends MovieListEntity {
 }
 
 class Data {
+  int? id;
+  String? title;
+  String? poster;
+  String? year;
+  String? country;
+  String? imdbRating;
+  List<String>? genres;
+  List<String>? images;
   Data({
-    int? id,
-    String? title,
-    String? poster,
-    String? year,
-    String? country,
-    String? imdbRating,
-    List<String>? genres,
-    List<String>? images,
+    this.id,
+    this.title,
+    this.poster,
+    this.year,
+    this.country,
+    this.imdbRating,
+    this.genres,
+    this.images,
   });
 
   factory Data.fromJson(Map<String, dynamic> json) {
@@ -39,7 +47,7 @@ class Data {
       country: json['country'],
       imdbRating: json['imdb_rating'],
       genres: json['genres'].cast<String>(),
-      images: json['images'].cast<String>(),
+      images: json['images'] == null ? [] : json['images'].cast<String>(),
     );
   }
 }

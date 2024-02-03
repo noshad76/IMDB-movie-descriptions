@@ -22,26 +22,28 @@ class MovieRepositoryImpl extends MovieRepository {
         MovieEntity movieEntity = MovieModel.fromJson(response.data);
         return DataSuccess(movieEntity);
       } else {
-        return  DataFailed(response.data['errors']);
+        return DataFailed(response.data['errors']);
       }
-    }on DioException catch (e) {
-      return  DataFailed(e.response!.data['errors']);
+    } on DioException catch (e) {
+      return DataFailed(e.response!.data['errors']);
     }
   }
 
   @override
   Future<DataState<MovieListEntity>> fetchMovieListData(int page) async {
-     Response response;
+    Response response;
     try {
       response = await movieApi.callMovieList(page);
       if (response.statusCode == 200) {
-        MovieListEntity movieListEntity = MovieListModel.fromJson(response.data);
+        MovieListEntity movieListEntity =
+            MovieListModel.fromJson(response.data);
+        print(response.data);
         return DataSuccess(movieListEntity);
       } else {
-        return  DataFailed(response.data['errors']);
+        return DataFailed(response.data['errors']);
       }
-    }on DioException catch (e) {
-      return  DataFailed(e.response!.data['errors']);
+    } on DioException catch (e) {
+      return DataFailed(e.response!.data['errors']);
     }
   }
 }
