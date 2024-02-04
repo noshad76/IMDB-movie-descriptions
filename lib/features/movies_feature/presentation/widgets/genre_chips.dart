@@ -29,14 +29,24 @@ class GenreChips extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         color: selectedGenere == index ? Palete.purple : Palete.white,
       ),
-      child: Text(
-        index == 0 ? 'All' : genre,
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-            color: selectedGenere == index ? Palete.white : Colors.black),
-      ),
+      child: genre == 'loading'
+          ? Center(
+              child: SizedBox(
+                height: height * 0.03,
+                width: height * 0.03,
+                child: CircularProgressIndicator(
+                  color: Palete.darkblue,
+                ),
+              ),
+            )
+          : Text(
+                genre,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                  color: selectedGenere == index ? Palete.white : Colors.black),
+            ),
     );
   }
 }

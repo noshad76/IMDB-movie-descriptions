@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 
 import 'package:movie_app/core/resources/data_state.dart';
@@ -40,7 +39,7 @@ class GenereRepositoryImpl extends GenereRepository {
       response = await genersApi.callMovieListByGenre(page, genreId);
       if (response.statusCode == 200) {
         MovieListByGenreEntitie movieListByGenereEntitie =
-            MovieListByGenereModel.fromJson(response.data);
+            MovieListByGenereModel.fromMap(response.data);
         return DataSuccess(movieListByGenereEntitie);
       } else {
         return DataFailed(response.data['erorrs']);

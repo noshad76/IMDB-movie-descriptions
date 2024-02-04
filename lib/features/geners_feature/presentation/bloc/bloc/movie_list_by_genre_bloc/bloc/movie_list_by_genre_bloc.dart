@@ -12,7 +12,7 @@ class MovieListByGenreBloc
   GetMovieListByGenretUsecase getMovieListByGenretUsecase;
   MovieListByGenreBloc({required this.getMovieListByGenretUsecase})
       : super(const MovieListByGenreLoading()) {
-    on<MovieListByGenreEvent>((event, emit) {
+    
       on<LoadMovieListByGenreEvent>((event, emit) async {
         emit(const MovieListByGenreLoading());
         DataState<MovieListByGenreEntitie> dataState =
@@ -23,6 +23,5 @@ class MovieListByGenreBloc
           emit(MovieListByGenreFaild(dataState.error!));
         }
       });
-    });
-  }
+    }
 }

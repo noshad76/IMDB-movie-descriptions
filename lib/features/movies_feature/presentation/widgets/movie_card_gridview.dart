@@ -1,23 +1,26 @@
-
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/colors.dart';
-import 'package:movie_app/features/movies_feature/presentation/bloc/movie_list_bloc/movie_list_bloc.dart';
+import 'package:movie_app/features/geners_feature/domain/entities/movie_list_by_genres.dart';
+import 'package:movie_app/features/movies_feature/domain/entities/movie_list_entity.dart';
 import 'package:movie_app/features/movies_feature/presentation/widgets/inner_shadow.dart';
 
 class MovieCardsGridView extends StatelessWidget {
-  const MovieCardsGridView({
-    super.key,
-    required this.height, required this.state,
-  });
-
+  const MovieCardsGridView(
+      {super.key,
+      required this.height,
+      this.movieListEntity,
+      this.movieListByGenreEntitie});
   final double height;
-  final MovieListState state;
+  final MovieListEntity? movieListEntity;
+  final MovieListByGenreEntitie? movieListByGenreEntitie;
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
       padding: const EdgeInsets.only(right: 16, left: 16),
       sliver: SliverGrid.builder(
-        itemCount: state.movieListEntity!.data!.length,
+        itemCount: movieListEntity != null
+            ? movieListEntity!.data!.length
+            : movieListByGenreEntitie!.data.length,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             mainAxisSpacing: 16,
             crossAxisSpacing: 16,
@@ -37,7 +40,9 @@ class MovieCardsGridView extends StatelessWidget {
                   color: Colors.black,
                   offset: const Offset(0, -70),
                   child: Image.network(
-                    state.movieListEntity!.data![index].poster!,
+                    movieListEntity != null
+                        ? movieListEntity!.data![index].poster!
+                        : movieListByGenreEntitie!.data[index].poster,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,7 +51,10 @@ class MovieCardsGridView extends StatelessWidget {
                     SizedBox(
                       height: height * 0.27,
                     ),
-                    Text(state.movieListEntity!.data![index].title!,
+                    Text(
+                        movieListEntity != null
+                            ? movieListEntity!.data![index].title!
+                            : movieListByGenreEntitie!.data[index].title,
                         maxLines: 1,
                         style: TextStyle(
                           color: Palete.white,
@@ -63,7 +71,9 @@ class MovieCardsGridView extends StatelessWidget {
                               color: Palete.purple,
                             ),
                             Text(
-                              state.movieListEntity!.data![index].year!,
+                              movieListEntity != null
+                                  ? movieListEntity!.data![index].year!
+                                  : movieListByGenreEntitie!.data[index].year,
                               style: TextStyle(
                                   color: Palete.purple,
                                   fontWeight: FontWeight.w600),
@@ -77,7 +87,10 @@ class MovieCardsGridView extends StatelessWidget {
                               color: Palete.purple,
                             ),
                             Text(
-                              state.movieListEntity!.data![index].imdbRating!,
+                              movieListEntity != null
+                                  ? movieListEntity!.data![index].imdbRating!
+                                  : movieListByGenreEntitie!
+                                      .data[index].imdb_rating,
                               style: TextStyle(
                                   color: Palete.purple,
                                   fontWeight: FontWeight.w600),

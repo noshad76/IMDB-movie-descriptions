@@ -6,28 +6,21 @@ import 'package:equatable/equatable.dart';
 import 'package:movie_app/features/geners_feature/domain/entities/movie_list_by_genres.dart';
 
 class MovieListByGenereModel extends MovieListByGenreEntitie {
-  
   const MovieListByGenereModel({
-    required List<Data>  data,
-   required Metadata metadata,
+    required List<Data> data,
+    required Metadata metadata,
   }) : super(data: data, metadata: metadata);
 
   factory MovieListByGenereModel.fromMap(Map<String, dynamic> map) {
     return MovieListByGenereModel(
       data: List<Data>.from(
-        (map['data'] as List<int>).map<Data>(
+        (map['data']).map<Data>(
           (x) => Data.fromMap(x as Map<String, dynamic>),
         ),
       ),
       metadata: Metadata.fromMap(map['metadata'] as Map<String, dynamic>),
     );
   }
-
-  factory MovieListByGenereModel.fromJson(String source) =>
-      MovieListByGenereModel.fromMap(
-          json.decode(source) as Map<String, dynamic>);
-
-  
 }
 
 class Data extends Equatable {
@@ -58,8 +51,8 @@ class Data extends Equatable {
       year: map['year'] as String,
       country: map['country'] as String,
       imdb_rating: map['imdb_rating'] as String,
-      genres: List<String>.from((map['genres'] as List<String>)),
-      images: List<String>.from(( map['images'] == null ? [] : map['images'].cast<String>())),
+      genres: map['genres'].cast<String>(),
+      images: map['images'] == null ? [] : map['images'].cast<String>(),
     );
   }
 
