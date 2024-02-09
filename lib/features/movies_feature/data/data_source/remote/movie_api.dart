@@ -16,7 +16,7 @@ class MovieApi {
 
   Future<Response> callMovieDetails(int id) async {
     Response movieListResponse = await dio
-        .get('https://moviesapi.ir/api/v1/movies/{movie_id}', queryParameters: {
+        .get('https://moviesapi.ir/api/v1/movies/$id', queryParameters: {
       'movie_id': id,
     });
     return movieListResponse;

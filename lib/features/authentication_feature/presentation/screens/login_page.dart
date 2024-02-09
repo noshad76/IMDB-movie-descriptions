@@ -168,6 +168,8 @@ class _LoginPageState extends State<LoginPage> {
                               () async {
                                 BlocProvider.of<MovieListBloc>(context)
                                     .add(LoadListMovie(1));
+                                BlocProvider.of<GenreBloc>(context)
+                                    .add(LoadGenreList());
 
                                 Navigator.of(context)
                                     .pushReplacement(MaterialPageRoute(

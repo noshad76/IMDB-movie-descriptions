@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 
 import 'package:movie_app/core/resources/data_state.dart';
@@ -37,6 +38,7 @@ class MovieRepositoryImpl extends MovieRepository {
       if (response.statusCode == 200) {
         MovieListEntity movieListEntity =
             MovieListModel.fromJson(response.data);
+
         return DataSuccess(movieListEntity);
       } else {
         return DataFailed(response.data['errors']);

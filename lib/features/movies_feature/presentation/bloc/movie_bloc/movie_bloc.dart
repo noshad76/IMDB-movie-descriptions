@@ -13,6 +13,7 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   MovieBloc({required this.getMovieDetailsUsecase})
       : super(const MovieLoading()) {
     on<LoadMovie>((event, emit) async {
+      emit(const MovieLoading());
       DataState<MovieEntity> dataState = await getMovieDetailsUsecase(event.id);
       if (dataState is DataSuccess) {
         emit(MovieLoaded(dataState.data!));
