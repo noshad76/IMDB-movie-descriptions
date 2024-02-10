@@ -6,10 +6,11 @@
 import 'dart:async' as _i5;
 import 'dart:typed_data' as _i8;
 
-import 'package:dio/src/adapter.dart' as _i3;
-import 'package:dio/src/options.dart' as _i7;
+import 'package:dio/dio.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:movie_app/core/resources/data_state.dart' as _i2;
+import 'package:movie_app/features/authentication_feature/data/data_source/remote/authentication_api.dart'
+    as _i7;
 import 'package:movie_app/features/authentication_feature/domain/entities/user_entity.dart'
     as _i6;
 import 'package:movie_app/features/authentication_feature/domain/repository/authentication_repository.dart'
@@ -87,6 +88,31 @@ class MockAuthenticationRepository extends _i1.Mock
       ) as _i5.Future<_i2.DataState<_i6.UserEntity>>);
 }
 
+/// A class which mocks [AuthenticationApi].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthenticationApi extends _i1.Mock implements _i7.AuthenticationApi {
+  MockAuthenticationApi() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  dynamic signUpRequest({
+    required String? name,
+    required String? email,
+    required String? password,
+  }) =>
+      super.noSuchMethod(Invocation.method(
+        #signUpRequest,
+        [],
+        {
+          #name: name,
+          #email: email,
+          #password: password,
+        },
+      ));
+}
+
 /// A class which mocks [HttpClientAdapter].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -97,7 +123,7 @@ class MockHttpClient extends _i1.Mock implements _i3.HttpClientAdapter {
 
   @override
   _i5.Future<_i3.ResponseBody> fetch(
-    _i7.RequestOptions? options,
+    _i3.RequestOptions? options,
     _i5.Stream<_i8.Uint8List>? requestStream,
     _i5.Future<void>? cancelFuture,
   ) =>

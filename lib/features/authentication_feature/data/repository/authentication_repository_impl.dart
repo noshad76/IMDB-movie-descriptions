@@ -13,55 +13,23 @@ class AuthenticationRepositoryImpl extends AuthenticationRepository {
     required this.authenticationApi,
   });
 
-  // @override
-  // Future<DataState<SignInEntity>> fetchSigninData(
-  //     String email, String password) async {
-  //   try {
-  //     Response response = await authenticationApi.signinRequest(
-  //         email: email, password: password);
-  //     print('---------------------------------------------'+'$response');
-  //     if (response.statusCode == 200) {
-  //       SignInEntity signInEntity = SignInModel.fromJson(response.data);
-  //       return DataSuccess(signInEntity);
-  //     } else {
-  //       return const DataFailed('Something Went Wrong. try again...');
-  //     }
-  //   } catch (e) {
-  //     return const DataFailed("please check your connection...");
-  //   }
-  // }
-
+ 
   @override
   Future<DataState<UserEntity>> fetchUserData(
       String email, String password, String name) async {
     Response response;
     try {
-       response = await authenticationApi.signUpRequest(
+      response = await authenticationApi.signUpRequest(
           name: name, email: email, password: password);
       if (response.statusCode == 201) {
         UserEntity userEntity = UserModel.fromJson(response.data);
         return DataSuccess(userEntity);
       } else {
-        return  DataFailed(response.data['errors']);
+        return DataFailed(response.data['errors']);
       }
-    }  on DioException catch (e) {
-      return  DataFailed(e.response!.data['errors']);
+    } on DioException catch (e) {
+      return DataFailed(e.response!.data['errors']);
     }
   }
 
-  // @override
-  // Future<DataState<SignInEntity>> refreshToken(String refreshToken) async {
-  //   try {
-  //     Response response = await authenticationApi.refreshTokenRequest(
-  //         refreshToken: refreshToken);
-  //     if (response.statusCode == 200) {
-  //       SignInEntity signInEntity = SignInModel.fromJson(response.data);
-  //       return DataSuccess(signInEntity);
-  //     } else {
-  //       return const DataFailed('Something Went Wrong. try again...');
-  //     }
-  //   } catch (e) {
-  //     return const DataFailed("please check your connection...");
-  //   }
-  // }
 }

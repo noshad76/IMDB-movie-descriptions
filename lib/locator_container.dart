@@ -27,7 +27,8 @@ Future<void> initializeDependencies() async {
   getIt.registerSingleton<Dio>(Dio());
 
   //api
-  getIt.registerSingleton<AuthenticationApi>(AuthenticationApi(dio: getIt()));
+  getIt.registerSingleton<AuthenticationApiImpl>(
+      AuthenticationApiImpl(dio: getIt()));
   getIt.registerSingleton<MovieApi>(MovieApi(dio: getIt()));
   getIt.registerSingleton<GenrsApi>(GenrsApi(dio: getIt()));
   //repositories
