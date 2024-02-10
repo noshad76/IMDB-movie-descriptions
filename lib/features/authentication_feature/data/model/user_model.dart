@@ -23,4 +23,11 @@ class UserModel extends UserEntity {
       updatedAt: json['updated_at'] as String,
     );
   }
+
+  UserEntity toEntity() => UserEntity(
+      id: id,
+      name: name,
+      email: email,
+      createdAt: createdAt,
+      updatedAt: updatedAt);
 }

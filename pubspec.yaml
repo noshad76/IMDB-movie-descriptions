@@ -41,22 +41,19 @@ dependencies:
   equatable: ^2.0.5
   toastification: ^1.2.0
   get_it: ^7.6.7
-  cached_network_image: ^3.3.1
-  drop_shadow_image: ^0.9.1
-  shadow: ^1.5.0
-  animated_text_kit: ^4.2.2
-  marquee: ^2.2.3
-
+  # test  dependencies
+  dartz: ^0.10.1
+  rxdart: ^0.27.3
+  http_mock_adapter: ^0.6.1
+  
 
 dev_dependencies:
+  bloc_test: ^9.0.2
+  build_runner: ^2.1.2
   flutter_test:
     sdk: flutter
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
+  mockito: ^5.0.15
+  mocktail: ^0.2.0
   flutter_lints: ^2.0.0
 
 
