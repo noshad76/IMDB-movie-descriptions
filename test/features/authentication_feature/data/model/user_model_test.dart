@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:movie_app/features/authentication_feature/data/model/user_model.dart';
 import 'package:movie_app/features/authentication_feature/domain/entities/user_entity.dart';
 
-import '../../../../test_helper/json_reader.dart';
+import '../../test_helper/json_reader.dart';
 
 void main() {
   const userEntity = UserEntity(
@@ -32,7 +32,7 @@ void main() {
     test('should return a valid model from json', () {
       //arrange
       final Map<String, dynamic> jsonMap = jsonDecode(
-        readJson('test_helper/dummy_data/dummy_userdata.json'),
+        readJson('features/authentication_feature/test_helper/dummy_data/dummy_userdata.json'),
       );
 
       //act

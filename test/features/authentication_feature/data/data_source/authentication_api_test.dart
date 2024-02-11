@@ -6,7 +6,7 @@ import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie_app/features/authentication_feature/data/data_source/remote/authentication_api.dart';
 
-import '../../../../test_helper/json_reader.dart';
+import '../../test_helper/json_reader.dart';
 
 void main() {
   late AuthenticationApiImpl authenticationApi;
@@ -20,7 +20,7 @@ void main() {
 
   group("get user data", () {
     final Map<String, dynamic> jsonMap = jsonDecode(
-      readJson('test_helper/dummy_data/dummy_userdata.json'),
+      readJson('features/authentication_feature/test_helper/dummy_data/dummy_userdata.json'),
     );
 
     String name = 'amir';

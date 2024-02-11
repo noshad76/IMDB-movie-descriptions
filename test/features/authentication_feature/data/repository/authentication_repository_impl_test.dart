@@ -8,8 +8,8 @@ import 'package:movie_app/features/authentication_feature/data/model/user_model.
 
 import 'package:movie_app/features/authentication_feature/data/repository/authentication_repository_impl.dart';
 
-import '../../../../test_helper/json_reader.dart';
-import '../../../../test_helper/test_helper.mocks.dart';
+import '../../test_helper/json_reader.dart';
+import '../../test_helper/test_helper.mocks.dart';
 
 void main() {
   late MockAuthenticationApi mockAuthenticationApi;
@@ -23,10 +23,10 @@ void main() {
 
   group('fetch user data from data srouce', () {
     final Map<String, dynamic> jsonMap = jsonDecode(
-      readJson('test_helper/dummy_data/dummy_userdata.json'),
+      readJson('features/authentication_feature/test_helper/dummy_data/dummy_userdata.json'),
     );
     final Map<String, dynamic> error = jsonDecode(
-      readJson('test_helper/dummy_data/dummy_user_error.json'),
+      readJson('features/authentication_feature/test_helper/dummy_data/dummy_user_error.json'),
     );
 
     String name = 'amir';
@@ -51,7 +51,7 @@ void main() {
       final result = await authenticationRepositoryImpl.fetchUserData(
           email, password, name);
 
-      expect(result.data, equals(const DataSuccess(userModel).data));
+      expect(result.data,const DataSuccess(userModel).data);
     });
     test(
       'should return server failure when a call to data source is unsuccessful',

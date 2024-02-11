@@ -4,7 +4,7 @@ import 'package:movie_app/core/resources/data_state.dart';
 import 'package:movie_app/features/authentication_feature/domain/entities/user_entity.dart';
 import 'package:movie_app/features/authentication_feature/domain/usecases/get_userdata_usecase.dart';
 
-import '../../../../test_helper/test_helper.mocks.dart';
+import '../../test_helper/test_helper.mocks.dart';
 
 void main() {
   late MockAuthenticationRepository mockAuthenticationRepository;

@@ -83,9 +83,11 @@ class TermsPage extends StatelessWidget {
                           ),
                           BlocBuilder<TermsPageCubit, TermsPageState>(
                             builder: (context, state) {
-                              final cubit = context.watch<TermsPageCubit>();
+                              final cubit =
+                                  BlocProvider.of<TermsPageCubit>(context);
                               return Card(
                                 child: Checkbox(
+                                  key: const Key('policycheckbox'),
                                   value: cubit.privacyPolicy,
                                   onChanged: (value) {
                                     cubit.togglePrivacy(value!);
@@ -121,6 +123,7 @@ class TermsPage extends StatelessWidget {
                               final cubit = context.watch<TermsPageCubit>();
                               return Card(
                                 child: Checkbox(
+                                  key: const Key('termcheckbox'),
                                   value: cubit.terms,
                                   onChanged: (value) {
                                     cubit.toggleTerms(value!);
@@ -185,6 +188,7 @@ class TermsPage extends StatelessWidget {
                         final cubit = context.read<TermsPageCubit>();
                         if (state is TermsPageInitial) {
                           return ElevatedButton(
+                            key:const Key('loginButton'),
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStatePropertyAll(Palete.purple),
