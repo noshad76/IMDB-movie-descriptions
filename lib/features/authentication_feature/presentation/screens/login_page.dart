@@ -74,6 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: width * 0.85,
                         child: TextFormField(
+                          key: Key('emailtf'),
                           controller: userName,
                           decoration: InputDecoration(
                             label: const Text('Email'),
@@ -98,6 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         width: width * 0.85,
                         child: TextFormField(
+                          key: Key('Passwordtf'),
                           controller: password,
                           obscureText: passwrodVisible,
                           decoration: InputDecoration(
@@ -197,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                               },
                             );
                           } else if (state is AuthenticationLoading) {
-                            return LoginButton(
+                            return LoginButton(key: Key('tohomepage'),
                               width: width * 0.85,
                               height: height * 0.05,
                               color: Palete.purple,
