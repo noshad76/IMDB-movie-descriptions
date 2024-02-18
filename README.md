@@ -1,17 +1,33 @@
-# movie_app
+# IMDb Movie Descriptions App
 
-A new Flutter project.
+## Overview
+
+This Flutter app is built with a strong emphasis on backend functionality, architecture, and testing. It provides a straightforward method to retrieve movie descriptions from IMDb, leveraging key features such as dependency injection, unit testing, Bloc pattern, mocking, and clean architecture principles.
+
+## Key Features
+
+- **Dependency Injection:** Utilizing dependency injection to manage component dependencies, promoting modularity, and ensuring a scalable backend architecture.
+
+- **Unit Testing:** Extensive unit tests cover critical components, ensuring the reliability and maintainability of the backend. Test-driven development (TDD) principles are followed to guarantee robust functionality.
+
+- **Bloc Pattern:** Adopting the Bloc pattern for efficient state management. Business logic components are separated from the UI, enhancing maintainability and facilitating future updates.
+
+- **Mocking:** Incorporating mocking techniques in unit tests to isolate components, enabling thorough testing in controlled environments, and ensuring the backend functions as expected in various scenarios.
+
+- **Clean Architecture:** Adhering to clean architecture principles, the codebase is structured into distinct layers (presentation, domain, data). This separation enhances code organization and facilitates easier future enhancements.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/your-username/imdb-movie-descriptions.git
+   cd imdb-movie-descriptions
 
-A few resources to get you started if this is your first Flutter project:
+2. **Install Dependencies:**
+   ```bash
+   flutter pub get
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+3. **Run Backend Tests:**
+   ```bash
+   flutter test
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# IMDB-movie-descriptions
