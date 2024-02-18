@@ -20,7 +20,7 @@ This Flutter app is built with a strong emphasis on backend functionality, archi
 
 1. **Clone the Repository:**
    ```bash
-   git clone https://github.com/your-username/imdb-movie-descriptions.git
+   git clone https://github.com/noshad76/IMDB-movie-descriptions.git
    cd imdb-movie-descriptions
 
 2. **Install Dependencies:**
